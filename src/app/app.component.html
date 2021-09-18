@@ -1,0 +1,112 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<style>
+  :host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 8px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+.example-section {
+  margin: 12px 0;
+}
+
+.example-margin {
+  margin: 0 12px;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}
+  .spacer {
+    flex: 1;
+  }
+
+</style>
+
+<div id="my-app"></div>
+<div class="login-outer-countainer">
+  <mat-card class="login-inner-countainer">
+    <mat-card-header class="login-title">
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="login-field-container">
+      <form [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="submitLoginForm(loginForm.value)"
+        fxLayout="column wrap">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="Placeholder"
+            formControlName="email"
+            id="email"
+            required
+          />
+          <mat-icon matSuffix>contact_page</mat-icon>
+          <mat-error *ngIf="hasError('email', 'required')">Email is required</mat-error>
+          <mat-error *ngIf="hasError('email', 'email')">Email is not valid</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'text' : 'password'"
+            formControlName="password"
+            id="password"
+            minlength="6"
+            required
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="hasError('password', 'required')">password is required</mat-error>
+          <mat-error *ngIf="hasError('password', 'minlength')">password is not valid</mat-error>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          class="login-btn"
+          [disabled]="!loginForm.valid"
+        >
+          Sign In
+        </button>
+      </form>
+      <button mat-flat-button class="register-btn" (click)="register()">
+        Not a Member? Sing Up
+      </button>
+      <br />
+    </mat-card-content>
+  </mat-card>
+</div>
+<router-outlet></router-outlet>
